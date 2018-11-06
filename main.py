@@ -30,7 +30,7 @@ def index():
 
     tasks = Task.query.filter_by(completed=False).all()
     completed_tasks = Task.query.filter_by(completed=True).all()
-    return render_template('todos.html',title="Get It Done!", 
+    return render_template('to-dos.html',title="Build A Blog", 
         tasks=tasks, completed_tasks=completed_tasks)
 
 
