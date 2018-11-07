@@ -57,6 +57,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'http://localhost/phpMyAdmin/tbl_structu
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
+
+
 class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
