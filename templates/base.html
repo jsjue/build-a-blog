@@ -1,12 +1,6 @@
-<!doctype html>
-<html>
-    <head>
-        <title>{{title}}</title>
-    </head>
-<body>
+{% extends "base.html" %}
 
     {% block content %}
+                <h1>{{ blog.title }}</h1>
+                <p>{{ blog.body }}</p>
     {% endblock %}
-
-</body>
-</html>
