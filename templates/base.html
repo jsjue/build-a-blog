@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 
-    {% block content %}
-                <h1>{{ blog.title }}</h1>
-                <p>{{ blog.body }}</p>
-    {% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+    
+        <title>{{title}}</title>
+    </head>
+        <body>
+            <div class="container-fluid">
+                <div class="nav-inline">
+                    <ul class="nav">
+                        <li class="nav-item" style="display:inline-block;">
+                            <a class="nav-link" href="/newpost">Add A Blog Entry</a>
+                        </li>
+                        <li class="nav-item" style="display:inline-block;">
+                            <a class="nav-link" href="/blog">View All Entries</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="here">
+                    <h1>Build A Blog!</h1>
+                    <h3>A minimalist blog-building app using Python, Flask, and SQLAlchemy</h3>
+                </div>
+                <div class="container main">
+                    {% block content %}
+                    {% endblock  %}
+                </div>
+            </div>
+        </body>
+</html>
