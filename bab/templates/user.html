@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="container">
+        <div>
+            <h1>{{ user.username }}</h1>
+
+            {% if blogs|length == 0 %}
+                <p>No blogs yet</p>
+            {% else %}
+
+                <ul>
+                    {% for blog in blogs %}
+                        <li><a href="{{ url_for('blog', id=blog.id) }}">{{ blog.name }}</a>
+                            <ul>
+                                <li class="blog-post-content">{{ blog.post }}</li>
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </main>
+{% endblock %}

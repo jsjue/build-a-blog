@@ -1,31 +1,29 @@
-{% extends "base.html" %}
-
 <!DOCTYPE html>
 <html>
     <head>
-    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'; type="text/css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='build-a-blog/style.css') }}">
+
         <title>{{title}}</title>
+        <p><label><a href="http://127.0.0.1:5000/newpost">New Blog</a></label><label for="New Blog"></label></p>
+        <p><label><a href="http://127.0.0.1:5000/blog">Blogs Already Created</a></label><label for="Blogs Already Created"</label></p>
     </head>
-        <body>
-            <div class="container-fluid">
-                <div class="nav-inline">
-                    <ul class="nav">
-                        <li class="nav-item" style="display:inline-block;">
-                            <a class="nav-link" href="/newpost">Add A Blog Entry</a>
-                        </li>
-                        <li class="nav-item" style="display:inline-block;">
-                            <a class="nav-link" href="/blog">View All Entries</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="here">
-                    <h1>Build A Blog!</h1>
-                    <h3>A minimalist blog-building app using Python, Flask, and SQLAlchemy</h3>
-                </div>
-                <div class="container main">
-                    {% block content %}
-                    {% endblock  %}
-                </div>
-            </div>
-        </body>
+    <body>
+
+                <h1>Build A Blog</h1>
+                <h3>This is a blog building app using HTML, Jinga, SQL and Python</h3>
+                {% block content %}
+                    {% for blog in blogs %}
+                <ul>
+                    <li><h2><a href="/blog?id={{ blog.id }}">{{ blog.title }}</a></h2>
+                    <p>{{ blog.body }}</p></li>li>
+                </ul>
+                    {% endfor %}
+                
+
+                {% endblock  %}
+
+    
+    </body>
 </html>

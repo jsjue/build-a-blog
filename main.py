@@ -1,16 +1,14 @@
-
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
                                         
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://Build-a-blog:couch@localhost:8889/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:couch@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
-app.secret_key = 'poiuytrewq'
-
+app.secret_key = 'polymorphism'
 
 
 class Blog(db.Model):
@@ -30,19 +28,19 @@ def show_posts():
     if request.method == 'GET' and request.args.get('id'):
         blog_id = request.args.get('id')
         blog = Blog.query.get(blog_id)
-        return render_template('base.html', title='Build A Blog!', blog=blog)
+        return render_template('post.html', title='Build A Blog', blog=blog)
 
     # displays all blog posts
     if request.method == 'GET' or request.method == 'POST':
         blogs = Blog.query.all()
-        return render_template('no-content.html', title='Build A Blog!', blogs=blogs)
+        return render_template('no-content.html', title='Build A Blog', blogs=blogs)
 
 
 @app.route('/newpost', methods=['POST', 'GET'])  # submits new post; after submitting, redirects to main blog page
 def add_post():
     # displays the add a post form
     if request.method == 'GET':
-        return render_template('to-dos.html', title="Build A Blog!")
+        return render_template('add_blog.html', title="Build A Blog")
 
     # form handler for new posts
     if request.method == 'POST':
@@ -53,19 +51,19 @@ def add_post():
 
         if not blog_title:  # if blog title is missing, render error
             title_error = error
-            return render_template('to-dos.html', title="Build A Blog!", title_error=title_error, blog_body=blog_body)
+            return render_template('add_blog.html', title="Build A Blog", title_error=title_error, blog_body=blog_body)
 
         if not blog_body:  # if blog body is missing, render error
             body_error = error
-            return render_template('to-dos.html', title="Build A Blog!", body_error=body_error, blog_title=blog_title)
+            return render_template('add_blog.html', title="Build A Blog", body_error=body_error, blog_title=blog_title)
 
         if not title_error and not body_error:
             new_blog = Blog(blog_title, blog_body)
             db.session.add(new_blog)
             db.session.commit()
             blog_id = new_blog.id
-            return redirect("/blog?id={}".format(blog_id))
 
+            return redirect("/blog?id={}".format(blog_id))
 
 if __name__ == '__main__':
     app.run()
